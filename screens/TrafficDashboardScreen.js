@@ -1,24 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { fetchTrafficData } from '../services/trafficDataService';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { getTrafficData } from '../services/trafficService';
 
 const TrafficDashboardScreen = () => {
   const [trafficData, setTrafficData] = useState(null);
 
   useEffect(() => {
-    fetchTrafficData().then(data => setTrafficData(data));
+    getTrafficData().then((data) => {
+      setTrafficData(data);
+    });
   }, []);
 
   return (
-    <View>
-      <Text>Real-Time Traffic Dashboard</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Traffic Dashboard</Text>
       {trafficData ? (
-        <Text>Traffic Density: {trafficData.density}</Text>
+        <View style={styles.trafficData}>
+          <Text>Current Traffic Density: {trafficData.density}</Text>
+          <Text>Congestion Points: {trafficData.congestion_points}</Text>
+          <Text>Average Speed: {trafficData.avg_speed} km/h</Text>
+        </View>
       ) : (
         <Text>Loading traffic data...</Text>
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  trafficData: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    marginTop: 10,
+  },
+});
 
 export default TrafficDashboardScreen;

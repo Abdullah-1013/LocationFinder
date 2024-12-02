@@ -1,28 +1,33 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View>
-      <Text>Welcome to Smart Traffic App</Text>
-      <Button
-        title="Go to Traffic Dashboard"
-        onPress={() => navigation.navigate('Traffic Dashboard')}
+    <View style={styles.container}>
+      <Text style={styles.heading}>Smart Public Transportation App</Text>
+      <Button 
+        title="Track Bus" 
+        onPress={() => navigation.navigate('Bus Tracking')} 
       />
-      <Button
-        title="Public Transport"
-        onPress={() => navigation.navigate('Public Transport')}
-      />
-      <Button
-        title="Pollution Monitoring"
-        onPress={() => navigation.navigate('Pollution Monitoring')}
-      />
-      <Button
-        title="Route Planner"
-        onPress={() => navigation.navigate('Route Planner')}
+      <Button 
+        title="Optimize Routes" 
+        onPress={() => navigation.navigate('Route Optimization')} 
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+});
 
 export default HomeScreen;
